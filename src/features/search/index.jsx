@@ -32,6 +32,7 @@ const Search = () => {
     <Box
       sx={{
         height: "15vh",
+        maxWidth: "1000px",
         minWidth: "500px",
         display: "flex",
         alignItems: "center",

@@ -3,14 +3,18 @@ import { Box, Typography } from "@mui/material";
 import { useSelector, useDispatch } from "react-redux";
 
 import { getPlanets } from "src/redux/slices/dataSlice";
-import { addFilter, removeFilter } from "src/redux/slices/filterSlice";
+import {
+  addFilter,
+  removeFilter,
+  clearFilters,
+} from "src/redux/slices/filterSlice";
 
 import Checkbox from "src/components/input/checkbox";
+import Button from "src/components/button";
 
 const Filter = ({ filter }) => {
   const { key, name, options } = filter;
-  const filtersState = useSelector((state) => state.filters);
-  const filters = filtersState.filters;
+  const filters = useSelector((state) => state.filters.filters);
   const dispatch = useDispatch();
 
   const onChange = (type, id) => {
@@ -22,10 +26,6 @@ const Filter = ({ filter }) => {
     dispatch(removeFilter({ key, id }));
   };
 
-  React.useEffect(() => {
-    dispatch(getPlanets(filtersState));
-  }, [filters]);
-
   return (
     <Box sx={{ display: "flex", flexDirection: "column" }}>
       <Typography variant="6">{name}</Typography>
@@ -34,7 +34,7 @@ const Filter = ({ filter }) => {
           <Checkbox
             key={item.id}
             label={item.name}
-            checked={filters[name]?.includes(item.id)}
+            checked={filters[key]?.includes(item.id)}
             onChange={(e) => onChange(e.target.checked, item.id)}
           />
         ))}
@@ -44,22 +44,27 @@ const Filter = ({ filter }) => {
 
 const Filters = () => {
   const data = useSelector((state) => state.data);
+  const dispatch = useDispatch();
+
+  const handleClearAllFilters = () => {
+    dispatch(clearFilters());
+  };
 
   const FILTERS = [
     {
       key: "color",
       name: "Color",
-      options: data.colors,
+      options: data.color,
     },
     {
       key: "shape",
       name: "Shape",
-      options: data.shapes,
+      options: data.shape,
     },
     {
       key: "size",
       name: "Size",
-      options: data.sizes,
+      options: data.size,
     },
   ];
 
@@ -76,6 +81,11 @@ const Filters = () => {
       {FILTERS.map((item) => (
         <Filter key={item.name} filter={item} />
       ))}
+      <Box>
+        <Button variant="outlined" onClick={handleClearAllFilters}>
+          Clear All Filters
+        </Button>
+      </Box>
     </Box>
   );
 };

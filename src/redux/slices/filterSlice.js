@@ -17,7 +17,9 @@ export const filterSlice = createSlice({
       state.query = payload.query;
     },
     addFilter: (state, { payload }) => {
-      state.filters[payload.key].push(payload.id);
+      state.filters[payload.key] = [
+        ...new Set([...state.filters[payload.key], payload.id]),
+      ];
     },
     removeFilter: (state, { payload }) => {
       state.filters[payload.key].splice(
@@ -25,9 +27,23 @@ export const filterSlice = createSlice({
         1
       );
     },
+    updateFilters: (state, { payload }) => {
+      state.query = payload.query;
+      state.filters = { ...payload.filters };
+    },
+    clearFilters: (state, { payload }) => {
+      state.query = initialState.query;
+      state.filters = { ...initialState.filters };
+    },
   },
 });
 
-export const { updateQuery, addFilter, removeFilter } = filterSlice.actions;
+export const {
+  updateQuery,
+  addFilter,
+  removeFilter,
+  updateFilters,
+  clearFilters,
+} = filterSlice.actions;
 
 export default filterSlice.reducer;

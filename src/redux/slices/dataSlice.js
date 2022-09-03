@@ -3,17 +3,16 @@ import { getURL } from "src/helpers";
 
 const initialState = {
   loading: false,
-  planets: [],
-  colors: [],
-  shapes: [],
-  sizes: [],
+  planet: [],
+  color: [],
+  shape: [],
+  size: [],
 };
 
 export const getPlanets = createAsyncThunk(
   "data/getPlanets",
   async (filters) => {
     const url = getURL(filters);
-    console.log(url);
     return fetch(url).then((res) => res.json());
   }
 );
@@ -39,7 +38,7 @@ export const dataSlice = createSlice({
     },
     [getPlanets.fulfilled]: (state, { payload }) => {
       state.loading = false;
-      state.planets = payload;
+      state.planet = payload;
     },
     [getPlanets.rejected]: (state) => {
       state.loading = false;
@@ -49,7 +48,7 @@ export const dataSlice = createSlice({
     },
     [getShapes.fulfilled]: (state, { payload }) => {
       state.loading = false;
-      state.shapes = payload;
+      state.shape = payload;
     },
     [getShapes.rejected]: (state) => {
       state.loading = false;
@@ -59,7 +58,7 @@ export const dataSlice = createSlice({
     },
     [getColors.fulfilled]: (state, { payload }) => {
       state.loading = false;
-      state.colors = payload;
+      state.color = payload;
     },
     [getColors.rejected]: (state) => {
       state.loading = false;
@@ -69,7 +68,7 @@ export const dataSlice = createSlice({
     },
     [getSizes.fulfilled]: (state, { payload }) => {
       state.loading = false;
-      state.sizes = payload;
+      state.size = payload;
     },
     [getSizes.rejected]: (state) => {
       state.loading = false;

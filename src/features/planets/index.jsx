@@ -5,7 +5,7 @@ import { useSelector } from "react-redux";
 import Planet from "src/components/planet";
 
 const Planets = () => {
-  const planets = useSelector((state) => state.data.planets);
+  const planets = useSelector((state) => state.data.planet);
 
   return (
     <Box

@@ -4,13 +4,13 @@ import { useSelector } from "react-redux";
 
 const Planet = ({ data }) => {
   const shape = useSelector(
-    (state) => state.data.shapes.find((item) => item.id === data.shape)?.name
+    (state) => state.data.shape.find((item) => item.id === data.shape)?.name
   );
   const color = useSelector(
-    (state) => state.data.colors.find((item) => item.id === data.color)?.name
+    (state) => state.data.color.find((item) => item.id === data.color)?.name
   );
   const size = useSelector(
-    (state) => state.data.sizes.find((item) => item.id === data.size)?.name
+    (state) => state.data.size.find((item) => item.id === data.size)?.name
   );
 
   return (

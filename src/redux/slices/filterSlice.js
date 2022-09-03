@@ -22,16 +22,15 @@ export const filterSlice = createSlice({
       ];
     },
     removeFilter: (state, { payload }) => {
-      state.filters[payload.key].splice(
-        state.filters[payload.key].findIndex((item) => item.id === payload.id),
-        1
+      state.filters[payload.key] = state.filters[payload.key].filter(
+        (item) => item !== payload.id
       );
     },
     updateFilters: (state, { payload }) => {
       state.query = payload.query;
       state.filters = { ...payload.filters };
     },
-    clearFilters: (state, { payload }) => {
+    clearFilters: (state) => {
       state.query = initialState.query;
       state.filters = { ...initialState.filters };
     },

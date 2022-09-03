@@ -13,13 +13,30 @@ const Planet = ({ data }) => {
     (state) => state.data.size.find((item) => item.id === data.size)?.name
   );
 
+  const getBgColor = (color) => {
+    if (color === "Red") {
+      return "#ff9d9d";
+    }
+    if (color === "Green") {
+      return "#a6f1a6";
+    }
+    if (color === "Blue") {
+      return "#c4ffff";
+    }
+  };
+
   return (
-    <MuiCard sx={{ minWidth: 275 }}>
+    <MuiCard
+      raised={true}
+      sx={{
+        backgroundColor: getBgColor(color),
+      }}
+    >
       <CardContent>
-        <Typography variant="h5" component="div">
+        <Typography variant="h5" component="div" sx={{ mb: 1.5 }}>
           {data?.name}
         </Typography>
-        <Typography sx={{ mb: 1.5 }} color="text.secondary">
+        <Typography color="text.secondary">
           {data?.name} is {shape} in shape, {color} in color and {size} in size.
         </Typography>
       </CardContent>

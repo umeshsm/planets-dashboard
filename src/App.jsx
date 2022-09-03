@@ -1,5 +1,5 @@
 import React from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useSearchParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { Grid, Box, IconButton } from "@mui/material";
 import ShareIcon from "@mui/icons-material/Share";
@@ -27,6 +27,7 @@ const App = () => {
   const dispatch = useDispatch();
   const clipboard = useClipboard();
   const location = useLocation();
+  const [_, setSearchParams] = useSearchParams();
 
   const handleCopySharableLink = () => {
     const sharableURL = getSharableURL(filters);
@@ -45,6 +46,8 @@ const App = () => {
       const color = params.get("color");
       const shape = params.get("shape");
       const size = params.get("size");
+
+      setSearchParams("");
 
       const sharedFilters = {
         query: query ?? "",
@@ -65,8 +68,23 @@ const App = () => {
   }, [filters]);
 
   return (
-    <Grid container alignItems="center" width="100%" height="100vh">
-      <Grid container item direction="column" alignItems="center">
+    <Grid
+      container
+      alignItems="center"
+      justifyContent="center"
+      minWidth="850px"
+      width="100%"
+      height="100vh"
+    >
+      <Grid
+        container
+        item
+        direction="column"
+        alignItems="center"
+        sm={12}
+        md={11}
+        lg={8}
+      >
         <Box
           sx={{
             width: "100%",
@@ -81,8 +99,8 @@ const App = () => {
             sx={{
               width: "50px",
               position: "absolute",
-              right: "10px",
-              top: "10px",
+              right: "20px",
+              top: "30%",
             }}
             onClick={handleCopySharableLink}
           >
@@ -90,7 +108,7 @@ const App = () => {
           </IconButton>
         </Box>
         <Grid container item height="85vh">
-          <Grid item xs={3}>
+          <Grid item xs={3} borderRight={1} borderColor="#E8E8E8">
             <Filters />
           </Grid>
           <Grid item xs={9} padding="20px">

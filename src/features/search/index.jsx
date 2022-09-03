@@ -33,7 +33,7 @@ const Search = () => {
       sx={{
         height: "15vh",
         maxWidth: "1000px",
-        minWidth: "500px",
+        minWidth: "600px",
         display: "flex",
         alignItems: "center",
         gap: "3px",

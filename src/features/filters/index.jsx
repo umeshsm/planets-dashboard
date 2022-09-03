@@ -28,7 +28,9 @@ const Filter = ({ filter }) => {
 
   return (
     <Box sx={{ display: "flex", flexDirection: "column" }}>
-      <Typography variant="6">{name}</Typography>
+      <Typography variant="6" sx={{ fontWeight: "bold" }}>
+        {name}
+      </Typography>
       {!!options.length &&
         options.map((item) => (
           <Checkbox

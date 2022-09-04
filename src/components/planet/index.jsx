@@ -13,18 +13,6 @@ const Planet = ({ data }) => {
     (state) => state.data.size.find((item) => item.id === data.size)?.name
   );
 
-  const getBgColor = (color) => {
-    if (color === "Red") {
-      return "#ff9d9d";
-    }
-    if (color === "Green") {
-      return "#a6f1a6";
-    }
-    if (color === "Blue") {
-      return "#c4ffff";
-    }
-  };
-
   return (
     <MuiCard raised={true}>
       <CardContent>

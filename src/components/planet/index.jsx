@@ -26,18 +26,22 @@ const Planet = ({ data }) => {
   };
 
   return (
-    <MuiCard
-      raised={true}
-      sx={{
-        backgroundColor: getBgColor(color),
-      }}
-    >
+    <MuiCard raised={true}>
       <CardContent>
         <Typography variant="h5" component="div" sx={{ mb: 1.5 }}>
           {data?.name}
         </Typography>
         <Typography color="text.secondary">
-          {data?.name} is {shape} in shape, {color} in color and {size} in size.
+          {data?.name} is{" "}
+          <Typography
+            component="span"
+            sx={{
+              color: color.toLowerCase(),
+            }}
+          >
+            <b>{color}</b>
+          </Typography>{" "}
+          in color, <b>{shape}</b> in shape and <b>{size}</b> in size.
         </Typography>
       </CardContent>
     </MuiCard>
